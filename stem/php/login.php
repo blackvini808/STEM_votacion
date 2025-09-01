@@ -3,12 +3,12 @@ session_start();
 include("conexion.php");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $correo = $_POST["correo"];
+    $email = $_POST["correo"]; // input del formulario sigue siendo 'correo'
     $password = $_POST["password"];
 
-    // Buscar usuario por correo
-    $stmt = $conexion->prepare("SELECT id, nombre, password FROM usuarios WHERE correo = ?");
-    $stmt->bind_param("s", $correo);
+    // Buscar usuario por email
+    $stmt = $conexion->prepare("SELECT id, nombre, password FROM usuarios WHERE email = ?");
+    $stmt->bind_param("s", $email);
     $stmt->execute();
     $resultado = $stmt->get_result();
 
@@ -22,13 +22,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION["usuario_nombre"] = $usuario["nombre"];
 
             // Redirigir a página de bienvenida
-            header("Location: bienvenido.php");
+            header("Location: votacion.php");
             exit();
         } else {
-            echo "Contraseña incorrecta.";
+            echo "❌ Contraseña incorrecta.";
         }
     } else {
-        echo "No existe un usuario con ese correo.";
+        echo "❌ No existe un usuario con ese correo.";
     }
 
     $stmt->close();

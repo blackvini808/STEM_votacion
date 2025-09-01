@@ -143,3 +143,14 @@ form button {
 form button:hover {
     background: #4954d0;
 }
+
+.login_logo {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px; /* separación entre la imagen y el primer campo */
+}
+
+.login_logo img {
+    width: 100px;
+    border-radius: 10px; /* opcional: esquinas redondeadas */
+}
