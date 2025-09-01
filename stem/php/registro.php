@@ -18,7 +18,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bind_param("sssss", $nombre, $email, $password_hash, $ip, $browser);
 
     if ($stmt->execute()) {
-        echo "✅ Registro exitoso. Ya puedes iniciar sesión.";
+        // Crear sesión automáticamente
+        session_start();
+        $_SESSION["usuario_id"] = $stmt->insert_id;
+        $_SESSION["usuario_nombre"] = $nombre;
+
+        // Mensaje y redirección
+        echo "✅ Registro exitoso, $nombre. Serás redirigido a votación en 3 segundos...";
+
+        // Redirigir después de 3 segundos
+        echo "<script>
+            setTimeout(function() {
+                window.location.href = 'votacion.php';
+            }, 3000);
+        </script>";
     } else {
         echo "❌ Error: " . $stmt->error;
     }

@@ -1,6 +1,6 @@
 <?php
 $servidor = "fdb1034.awardspace.net";
-$usuario  = "BLACK VINI";
+$usuario  = "4667271_usuariosstem";
 $password = "cn@cz0;84Hljdh}S";
 $bd       = "4667271_usuariosstem";
 
